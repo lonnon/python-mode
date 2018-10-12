@@ -9,11 +9,11 @@ fun! pymode#breakpoint#init() "{{{
 
         PymodePython << EOF
 
-from imp import find_module
+from importlib import import_module
 
 for module in ('wdb', 'pudb', 'ipdb', 'pdb'):
     try:
-        find_module(module)
+        import_module(module)
         vim.command('let g:pymode_breakpoint_cmd = "import %s; %s.set_trace()  # XXX BREAKPOINT"' % (module, module))
         break
     except ImportError:
